@@ -1,0 +1,38 @@
+{
+    "editor.minimap.enabled": false,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "workbench.settings.applyToAllProfiles": [
+        "editor.tabSize"
+    ],
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Atom One Dark",
+    "tailwindCSS.includeLanguages": {
+        "html": "html",
+        "django-html": "html",
+        "javascript": "javascript",
+        "css": "css"
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "css.validate": false,
+    "tailwindCSS.emmetCompletions": true,
+    "editor.inlineSuggest.enabled": true,
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "python.createEnvironment.trigger": "off",
+    "python.analysis.typeCheckingMode": "basic",
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
+    "settingsSync.ignoredExtensions": [
+        "bradlc.vscode-tailwindcss"
+    ]
+}
