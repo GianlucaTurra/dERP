@@ -1,4 +1,4 @@
 @echo on
 
-cd fcksmi
+cd derp
 python manage.py tailwind start

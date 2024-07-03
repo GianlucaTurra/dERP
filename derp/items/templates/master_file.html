@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Items-Master
+{% endblock title %}
+
+{% block content %}
+<!--BUTTONS-->
+<div>
+  <button class="mt-4 m-2 p-2 rounded-lg bg-teal-700 text-slate-50 font-semibold" hx-get="/items/new" hx-target="#grid" hx-swap="afterend">Add new item</button>
+</div>
+
+<!--GRID-->
+<div id="grid" class="mx-2 mt-6 relative overflow-x-auto shadow-md rounded-lg">
+  <table class="w-full text-m text-left table-auto border-collapse">
+    <thead class="bg-teal-700 text-slate-50">
+      <tr>
+        <th scope="col" class="py-2 px-4">Name</th>
+        <th scope="col" class="py-2 px-4">Description</th>
+        <th scope="col" class="py-2 px-4">Actions</th>
+      </tr>
+    </thead> 
+    <tbody>
+      {% for item in items %}
+        <tr id="id-{{item.id}}" class="odd:bg-slate-50 even:bg-slate-200">
+          <td scope="row" class="py-2 px-4 font-semibold">{{ item.name }}</td>
+          <td scope="row" class="py-2 px-4">{{ item.description }}</td>
+          <td scope="row">
+            {% csrf_token %}
+            <button 
+              hx-delete="/items/delete/{{item.id}}" 
+              hx-target="#id-{{item.id}}" 
+              hx-swap="delete swap:1s" 
+              class="py-1 px-2 font-semibold rounded-lg bg-red-700 text-slate-100">
+              D
+            </button>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
