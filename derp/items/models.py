@@ -12,6 +12,10 @@ class Item(
     """
     name = models.CharField(max_length=20, null=False, unique=True)
     description = models.TextField(null=True, blank=True)
+    width_mm = models.FloatField(verbose_name="Width in millimeters", null=False, default=0.)
+    height_mm = models.FloatField(verbose_name="Heigth in millimeters", null=False, default=0.)
+    depth_mm = models.FloatField(verbose_name="Depth in millimeters", null=False, default=0.)
+    weigth_g = models.FloatField(verbose_name="Weigth in grams", null=False, default=0.)
     components = models.ForeignKey(
         'self', 
         on_delete=models.CASCADE,

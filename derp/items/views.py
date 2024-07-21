@@ -9,16 +9,10 @@ from .forms import NewItemForm
 
 @login_required
 def master_file(request: HttpRequest) -> HttpResponse:
-    """Get items from db
+    """Get all items from db
     """
     items = Item.objects.all()
-    return render(
-        request,
-        'master_file.html', 
-        {
-            'items': items
-        }
-    )
+    return render(request, 'master_file.html', {'items': items})
 
 # @login_required
 def new_item(request: HttpRequest) -> HttpResponse:

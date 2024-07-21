@@ -34,7 +34,8 @@ class UserOperations(models.Model):
         User,
         related_name='modified_items',
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True
     )
 
     class Meta:
