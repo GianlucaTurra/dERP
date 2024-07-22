@@ -14,7 +14,7 @@ def master_file(request: HttpRequest) -> HttpResponse:
     items = Item.objects.all()
     return render(request, 'master_file.html', {'items': items})
 
-# @login_required
+@login_required
 def new_item(request: HttpRequest) -> HttpResponse:
     """Add new Item
     GET: returns the template with the form
@@ -37,9 +37,11 @@ def new_item(request: HttpRequest) -> HttpResponse:
 def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
     """Delete a record from Item
     If the record is not found a 404 response is risen
-    After deletion the user is redirected to item master page (only place to call this)
+    If called from master file (GET) returns a confirmation dialog
+    After deletion the user is redirected to item master page 
     """
+    item = get_object_or_404(Item, pk=uuid)
     if request.method == 'DELETE':
-        item = get_object_or_404(Item, pk=uuid)
         item.delete()
-    return master_file(request)
+        return master_file(request)
+    return render(request, 'confirm_delete.html', {'item': item})

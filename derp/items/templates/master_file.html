@@ -24,9 +24,8 @@ Items-Master
       <tr>
         <th scope="col" class="py-2 px-4">Name</th>
         <th scope="col" class="py-2 px-4">Description</th>
-        <th scope="col" class="py-2 px-4">Heigth</th>
-        <th scope="col" class="py-2 px-4">Width</th>
-        <th scope="col" class="py-2 px-4">Depth</th>
+        <th scope="col" class="py-2 px-4">Volume</th>
+        <th scope="col" class="py-2 px-4">Weigth</th>
         <th scope="col" class="py-2 px-4">Actions</th>
       </tr>
     </thead> 
@@ -35,15 +34,15 @@ Items-Master
         <tr id="id-{{item.id}}" class="odd:bg-slate-50 even:bg-slate-200">
           <td scope="row" class="py-2 px-4 font-semibold">{{ item.name }}</td>
           <td scope="row" class="py-2 px-4">{{ item.description }}</td>
-          <td scope="row" class="py-2 px-4">{{ item.heigth_mm }}</td>
-          <td scope="row" class="py-2 px-4">{{ item.width_mm }}</td>
-          <td scope="row" class="py-2 px-4">{{ item.depth_mm }}</td>
+          <td scope="row" class="py-2 px-4">{{ item.volume_cm3 }}</td>
+          <td scope="row" class="py-2 px-4">{{ item.weigth_g }}</td>
           <td scope="row">
             {% csrf_token %}
             <button 
-              hx-delete="/items/delete/{{item.id}}" 
-              hx-target="#id-{{item.id}}" 
-              hx-swap="delete swap:1s" 
+              hx-get="/items/delete/{{item.id}}" 
+              hx-target="body" 
+              hx-swap="beforeend" 
+              hx-trigger="click"
               class="py-1 px-2 font-semibold rounded-lg bg-red-700 text-slate-100">
               D
             </button>
