@@ -14,6 +14,7 @@ def master_file(request: HttpRequest) -> HttpResponse:
     items = Item.objects.all()
     return render(request, 'master_file.html', {'items': items})
 
+
 @login_required
 def new_item(request: HttpRequest) -> HttpResponse:
     """Add new Item
@@ -45,3 +46,22 @@ def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
         item.delete()
         return master_file(request)
     return render(request, 'confirm_delete.html', {'item': item})
+
+
+@login_required
+def update_item(request: HttpRequest, uuid: str) -> HttpResponse:
+    """Update a record from Item
+    If the record is not found a 404 response is rise
+    If GET request the editable table row is returned for htmx swap
+    If PUT request the actual update is performed
+    """
+    item = get_object_or_404(Item, pk=uuid)
+    if request.method == 'POST':
+        item.name = request.POST['name']
+        item.description = request.POST['description']
+        item.weigth_g = float(request.POST['weigth_g'])
+        item.volume_cm3 = float(request.POST['volume_cm3'])
+        item.last_modified_by = request.user
+        item.save()
+        return render(request, 'item_inline.html', {'item': item})
+    return render(request, 'update_item_inline.html', {'item': item})

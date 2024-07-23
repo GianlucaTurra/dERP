@@ -1,0 +1,36 @@
+<tr id="id-{{item.id}}" class="odd:bg-slate-50 even:bg-slate-200">
+    <td scope="row" class="px-4 font-semibold">
+        <input type="text" name="name" value="{{ item.name }}" class="rounded-lg w-full">
+    </td>
+    <td scope="row" class="py-2 px-4">
+        <textarea name="description" class="rounded-lg w-full max-h-11">{{ item.description }}</textarea>
+    </td>
+    <td scope="row" class="py-2 px-4">
+        <input type="number" name="volume_cm3" value="{{ item.volume_cm3 }}" class="rounded-lg w-full"> 
+    </td>
+    <td scope="row" class="py-2 px-4">
+        <input type="number" name="weigth_g" value="{{ item.weigth_g }}" class="rounded-lg w-full">
+    </td>
+    <td scope="row">
+      {% csrf_token %}
+      <button 
+        disabled
+        type="button"
+        hx-get="/items/delete/{{item.id}}" 
+        hx-target="body" 
+        hx-swap="beforeend" 
+        hx-trigger="click"
+        class="py-1 px-2 font-semibold rounded-lg bg-slate-400 text-slate-100">
+        D
+      </button>
+      <button 
+        type="button"
+        hx-post="/items/update/{{item.id}}"
+        hx-target="#id-{{item.id}}"
+        hx-swap="outerHTML"
+        hx-include="[name='name'], [name='description'], [name='volume_cm3'], [name='weigth_g']"
+        class="py-1 px-2 font-semibold rounded-lg bg-blue-600 text-slate-100">
+        U
+      </button>
+    </td>
+  </tr>

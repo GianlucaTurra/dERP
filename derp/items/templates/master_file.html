@@ -39,12 +39,21 @@ Items-Master
           <td scope="row">
             {% csrf_token %}
             <button 
+              type="button"
               hx-get="/items/delete/{{item.id}}" 
               hx-target="body" 
               hx-swap="beforeend" 
               hx-trigger="click"
               class="py-1 px-2 font-semibold rounded-lg bg-red-700 text-slate-100">
               D
+            </button>
+            <button 
+              type="button"
+              hx-get="/items/update/{{item.id}}"
+              hx-target="#id-{{item.id}}"
+              hx-swap="outerHTML"
+              class="py-1 px-2 font-semibold rounded-lg bg-blue-600 text-slate-100">
+              U
             </button>
           </td>
         </tr>
