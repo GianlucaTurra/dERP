@@ -61,4 +61,14 @@ Items-Master
     </tbody>
   </table>
 </div>
+<div class="mx-2 mt-2 relative overflow-x-auto h-8">
+    <a 
+      type="button"
+      hx-get="/items/new/inline"
+      hx-target="tbody > tr:last-child"
+      hx-swap="afterend"
+      class="py-1 px-2 font-semibold text-green-600 cursor-pointer">
+      New
+    </a>
+</div>
 {% endblock content %}

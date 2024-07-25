@@ -35,6 +35,24 @@ def new_item(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
+def new_item_inline(request: HttpRequest) -> HttpResponse:
+    """Add new item with inline input
+    Same as update_item_inline accepts both GET and POST
+    With GET returns the template and with POST creates the new record
+    """
+    if request.method == 'POST':
+        item = Item()
+        item.name = request.POST['name']
+        item.description = request.POST['description']
+        item.weigth_g = float(request.POST['weigth_g'])
+        item.volume_cm3 = float(request.POST['volume_cm3'])
+        item.created_by = request.user
+        item.save()
+        return render(request, 'item_inline.html', {'item': item})
+    return render(request, 'create_item_inline.html')
+
+
+@login_required
 def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
     """Delete a record from Item
     If the record is not found a 404 response is risen
