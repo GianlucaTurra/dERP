@@ -1,0 +1,21 @@
+<div id="multi-menu"
+    class="fixed inset-0 flex items-center justify-start z-50"
+    _="on closeModal add .closing then remove me">
+    <div class="p-6 shadow-lg rounded-lg overflow-hidden w-fit bg-slate-100">
+        {% for app in apps %}
+        <button 
+            type="button">
+            {{ app.name }}
+        </button>
+        <div class="block">
+            {% for endpoint in app.endpoints %}
+                <a 
+                    href="{{ endpoint.url }}"
+                    _="on click trigger closeModal">
+                    {{ endpoint.name }}
+                </a>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
