@@ -1,32 +1,15 @@
 <tr id="id-{{item.id}}" class="odd:bg-slate-50 even:bg-slate-200">
     <td scope="row" class="px-4 font-semibold">
-        <input 
-          type="text" 
-          name="name" 
-          value="{{ item.name }}" 
-          placeholder="Item name"
-          class="rounded-lg w-full">
+        <input type="text" name="name" value="{{ item.name }}" class="rounded-lg w-full">
     </td>
     <td scope="row" class="py-2 px-4">
-        <input
-          name="description" 
-          value="{{ item.description }}"
-          placeholder="Brief description"
-          class="rounded-lg w-full max-h-11">
+        <textarea name="description" class="rounded-lg w-full max-h-11">{{ item.description }}</textarea>
     </td>
     <td scope="row" class="py-2 px-4">
-        <input 
-          type="number" 
-          name="volume_cm3" 
-          value="{{ item.volume_cm3 }}" 
-          class="rounded-lg w-full"> 
+        <input type="number" name="volume_cm3" value="{{ item.volume_cm3 }}" class="rounded-lg w-full"> 
     </td>
     <td scope="row" class="py-2 px-4">
-        <input 
-          type="number" 
-          name="weigth_g" 
-          value="{{ item.weigth_g }}" 
-          class="rounded-lg w-full">
+        <input type="number" name="weigth_g" value="{{ item.weigth_g }}" class="rounded-lg w-full">
     </td>
     <td scope="row">
       {% csrf_token %}
