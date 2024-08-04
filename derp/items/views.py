@@ -28,7 +28,6 @@ def new_item(request: HttpRequest) -> HttpResponse:
     """Add new Item
     GET: returns the template with the form
     POST: validates and saves the form, then renders the master again
-    TODO: should it really return to master? 
     """
     if request.method == 'POST':
         form = ItemForm(request.POST)
@@ -52,9 +51,11 @@ def new_item_inline(request: HttpRequest) -> HttpResponse:
         item = Item()
         item.name = request.POST['name']
         item.description = request.POST['description']
-        item.weigth_g = float(request.POST['weigth_g'])
-        item.volume_cm3 = float(request.POST['volume_cm3'])
-        item.created_by = request.user
+        item.weigth = float(request.POST['weigth'])
+        item.weigth_measure = request.POST['weigth_measure']
+        item.volume = float(request.POST['volume'])
+        item.volume_measure = request.POST['volume_measure']
+        item.created_by = request.user # type: ignore
         item.save()
         return render(request, 'item_inline.html', {'item': item})
     return render(request, 'create_item_inline.html')
@@ -74,6 +75,34 @@ def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
     return render(request, 'confirm_delete.html', {'item': item})
 
 
+# TODO: here's some code repetition with the new item view, maybe abstract this?
+@login_required
+def update_item(request: HttpRequest, uuid: str) -> HttpResponse:
+    """Update item from detail dialog
+    GET: return the form with the initial of the fields
+    POST: updates the record in the database and returns (dialog closing on its own)
+    """
+    item = get_object_or_404(Item, pk=uuid)
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            item: Item = form.save()
+            item.last_modified_by = request.user # type: ignore
+            item.save()
+            return HttpResponse(status=202)
+    else:
+        form = ItemForm(initial={
+            'name': item.name,
+            'descritpion': item.description,
+            'weigth': item.weigth,
+            'weigth_measure': item.weigth_measure,
+            'volume': item.volume,
+            'volume_measure': item.volume_measure
+        },
+        auto_id=False)
+    return render(request, 'update_item.html', {'form': form})
+
+
 @login_required
 def update_item_inline(request: HttpRequest, uuid: str) -> HttpResponse:
     """Update a record from Item
@@ -87,7 +116,7 @@ def update_item_inline(request: HttpRequest, uuid: str) -> HttpResponse:
         item.description = request.POST['description']
         item.weigth = float(request.POST['weigth'])
         item.volume = float(request.POST['volume'])
-        item.last_modified_by = request.user
+        item.last_modified_by = request.user # type: ignore
         item.save()
         return render(request, 'item_inline.html', {'item': item})
     return render(request, 'update_item_inline.html', {'item': item})

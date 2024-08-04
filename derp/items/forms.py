@@ -1,8 +1,6 @@
 # pylint: disable=missing-class-docstring,missing-module-docstring
 from django import forms
 from .models import Item
-from .modules.measure_units import VOLUME, WEIGTH
-
 
 BASIC_STYLE = 'rounded-lg w-full'
 DIMENSIONS_STYLE = 'rounded-lg w-full'
