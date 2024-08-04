@@ -16,6 +16,14 @@ def master_file(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
+def item_detail(request: HttpRequest, uuid: str) -> HttpResponse:
+    """Return template of single item detail
+    """
+    item = get_object_or_404(Item, pk=uuid)
+    return render(request, 'item_detail.html', {'item': item})
+
+
+@login_required
 def new_item(request: HttpRequest) -> HttpResponse:
     """Add new Item
     GET: returns the template with the form
@@ -67,7 +75,7 @@ def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
 
 
 @login_required
-def update_item(request: HttpRequest, uuid: str) -> HttpResponse:
+def update_item_inline(request: HttpRequest, uuid: str) -> HttpResponse:
     """Update a record from Item
     If the record is not found a 404 response is rise
     If GET request the editable table row is returned for htmx swap

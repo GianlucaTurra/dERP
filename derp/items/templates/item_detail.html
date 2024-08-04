@@ -1,0 +1,47 @@
+<div id="modal" 
+  class="fixed inset-0 flex items-center justify-center z-50"
+  _="on closeModal add .closing then remove me">
+  <div class="p-6 shadow-lg rounded-lg overflow-hidden w-1/2 bg-slate-100">
+    <h2 class="text-teal-700 font-bold capitalize text-lg align-middle text-center">{{ item }}</h2>
+      <div class="space-y-4">
+        <div>
+          <p>Description</p>
+          <p>{{ item.description }}</p>
+        </div>
+        <div>
+          <h2>Techical details</h2>
+          <p>Volume: {{ item.volume_cm3 }}</p>
+          <p>Weigth: {{ item.weigth_g }}</p>
+        </div>
+        <div>
+          <h2>Components</h2>
+          <ul>
+            {% for component in item.components %}
+              <li>{{  component  }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div>
+          <h2>Other informations</h2>
+          <p>Created by: {{ item.created_by }} at {{ item.created }}</p>
+          <p>Last modified by: {{ item.last_modified_by }} at {{ item.modified }} </p>
+        </div>
+      </div>
+      <div class="flex items-baseline">
+        <button 
+          class="p-2 m-2 bg-teal-700 text-slate-50 font-semibold rounded-lg w-full
+          hover:bg-slate-100 hover:text-teal-700"
+          type="button"
+          hx-get="/items/update/{{item.id}}"
+          hx-target="#modal"
+          hx-swap="innerHTML">Update
+        </button>
+        <button
+          class="p-2 m-2 bg-slate-50 text-teal-700 font-semibold rounded-lg w-full
+            hover:bg-teal-700 hover:text-slate-50"
+          type="button"
+          _="on click trigger closeModal">Cancel
+        </button>
+      </div>
+  </div>
+</div>
