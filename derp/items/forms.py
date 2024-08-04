@@ -1,40 +1,36 @@
 # pylint: disable=missing-class-docstring,missing-module-docstring
 from django import forms
 from .models import Item
+from .modules.measure_units import VOLUME, WEIGTH
 
 
 BASIC_STYLE = 'rounded-lg w-full'
 DIMENSIONS_STYLE = 'rounded-lg w-full'
 
 
-class NewItemForm(forms.ModelForm):
+class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['name', 'description', 'volume_cm3', 'weigth_g']
-
-    name = forms.CharField(
-        widget=forms.TextInput(attrs={
-            'class': BASIC_STYLE,
-            'placeholder': 'New Item'
-        })
-    )
-    description = forms.CharField(
-        widget=forms.Textarea(attrs={
-            'class': BASIC_STYLE,
-            'placeholder': 'Brief description'
-        })
-    )
-    volume_cm3 = forms.FloatField(
-        label='Volume in cm3',
-        widget=forms.NumberInput({
-            'class': DIMENSIONS_STYLE,
-            'placeholder': 0.00,
-            'step': 0.01
-        }))
-    weigth_g = forms.FloatField(
-        label='Weigth in grams',
-        widget=forms.NumberInput({
-            'class': DIMENSIONS_STYLE,
-            'placeholder': 0.00,
-            'step': 0.01
-        }))
+        fields = ['name', 'description', 'volume', 'weigth', 'volume_measure', 'weigth_measure']
+        widgets = {
+                'name': forms.TextInput(attrs={
+                    'class': BASIC_STYLE,
+                    'placeholder': 'Some name'
+                }),
+                'description': forms.Textarea(attrs={
+                    'class': BASIC_STYLE,
+                    'placeholder': 'Some brief description'
+                }),
+                'volume': forms.NumberInput(attrs={
+                    'class': DIMENSIONS_STYLE
+                }),
+                'weigth': forms.NumberInput(attrs={
+                    'class': f'{DIMENSIONS_STYLE}'
+                }),
+                'volume_measure': forms.Select(attrs={
+                    'class': BASIC_STYLE
+                }),
+                'weigth_measure': forms.Select(attrs={
+                    'class': f'{BASIC_STYLE}'
+                }),
+            }

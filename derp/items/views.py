@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .models import Item
-from .forms import NewItemForm
+from .forms import ItemForm
 
 
 @login_required
@@ -31,14 +31,14 @@ def new_item(request: HttpRequest) -> HttpResponse:
     TODO: should it really return to master? 
     """
     if request.method == 'POST':
-        form = NewItemForm(request.POST)
+        form = ItemForm(request.POST)
         if form.is_valid():
             item: Item = form.save()
             item.created_by = request.user
             item.save()
             return redirect('/items/master')
     else:
-        form = NewItemForm()
+        form = ItemForm()
     return render(request, 'add_item.html', {'form': form})
 
 
@@ -85,8 +85,8 @@ def update_item_inline(request: HttpRequest, uuid: str) -> HttpResponse:
     if request.method == 'POST':
         item.name = request.POST['name']
         item.description = request.POST['description']
-        item.weigth_g = float(request.POST['weigth_g'])
-        item.volume_cm3 = float(request.POST['volume_cm3'])
+        item.weigth = float(request.POST['weigth'])
+        item.volume = float(request.POST['volume'])
         item.last_modified_by = request.user
         item.save()
         return render(request, 'item_inline.html', {'item': item})
