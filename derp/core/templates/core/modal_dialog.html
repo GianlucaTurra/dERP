@@ -1,0 +1,7 @@
+<div id="modal" 
+    class="fixed inset-0 flex items-center justify-center z-50"
+    _="on closeModal add .closing then remove me">
+    {% block content %}
+    <!--Content needs to have a closeModal trigger-->
+    {% endblock content %}
+</div>

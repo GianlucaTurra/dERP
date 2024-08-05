@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Item
 from .forms import ItemForm
+from .modules.measure_units import VOLUME, WEIGTH
 
 
 @login_required
@@ -13,6 +14,15 @@ def master_file(request: HttpRequest) -> HttpResponse:
     """
     items = Item.objects.all()
     return render(request, 'master_file.html', {'items': items})
+
+
+@login_required
+def inline(request: HttpRequest, uuid: str) -> HttpResponse:
+    """Return single iteme line for table
+    Used to undo the update inline
+    """
+    item = get_object_or_404(Item, pk=uuid)
+    return render(request, 'item_inline.html', {'item': item})
 
 
 @login_required
@@ -33,7 +43,7 @@ def new_item(request: HttpRequest) -> HttpResponse:
         form = ItemForm(request.POST)
         if form.is_valid():
             item: Item = form.save()
-            item.created_by = request.user
+            item.created_by = request.user # type: ignore
             item.save()
             return redirect('/items/master')
     else:
@@ -58,7 +68,7 @@ def new_item_inline(request: HttpRequest) -> HttpResponse:
         item.created_by = request.user # type: ignore
         item.save()
         return render(request, 'item_inline.html', {'item': item})
-    return render(request, 'create_item_inline.html')
+    return render(request, 'create_item_inline.html', {'w_options': WEIGTH, 'v_options': VOLUME})
 
 
 @login_required
@@ -71,7 +81,7 @@ def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
     item = get_object_or_404(Item, pk=uuid)
     if request.method == 'DELETE':
         item.delete()
-        return master_file(request)
+        return render(request, 'core/empty.html')
     return render(request, 'confirm_delete.html', {'item': item})
 
 
