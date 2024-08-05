@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Item
 from .forms import ItemForm
+from .modules.measure_units import VOLUME, WEIGTH
 
 
 @login_required
@@ -58,7 +59,7 @@ def new_item_inline(request: HttpRequest) -> HttpResponse:
         item.created_by = request.user # type: ignore
         item.save()
         return render(request, 'item_inline.html', {'item': item})
-    return render(request, 'create_item_inline.html')
+    return render(request, 'create_item_inline.html', {'w_options': WEIGTH, 'v_options': VOLUME})
 
 
 @login_required
