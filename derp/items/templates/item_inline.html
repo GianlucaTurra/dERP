@@ -1,8 +1,8 @@
 <tr id="id-{{item.id}}" class="odd:bg-slate-50 even:bg-slate-200">
     <td scope="row" class="py-2 px-4 font-semibold">{{ item.name }}</td>
     <td scope="row" class="py-2 px-4">{{ item.description }}</td>
-    <td scope="row" class="py-2 px-4">{{ item.volume_cm3 }}</td>
-    <td scope="row" class="py-2 px-4">{{ item.weigth_g }}</td>
+    <td scope="row" class="py-2 px-4">{{ item.volume }} {{ item.volume_measure }}</td>
+    <td scope="row" class="py-2 px-4">{{ item.weigth }}{{ item.weigth_measure }}</td>
     <td scope="row">
       {% csrf_token %}
       <button 

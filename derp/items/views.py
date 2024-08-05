@@ -33,7 +33,7 @@ def new_item(request: HttpRequest) -> HttpResponse:
         form = ItemForm(request.POST)
         if form.is_valid():
             item: Item = form.save()
-            item.created_by = request.user
+            item.created_by = request.user # type: ignore
             item.save()
             return redirect('/items/master')
     else:
