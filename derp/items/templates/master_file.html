@@ -10,7 +10,7 @@ Items-Master
   <button 
     class="mt-4 m-2 p-2 rounded-lg bg-teal-700 text-slate-50 font-semibold 
     hover:bg-slate-100 hover:text-yellow-500" 
-    hx-get="/items/new" 
+    hx-get={% url "items:new" %} 
     hx-target="body" 
     hx-swap="beforeend" 
     hx-trigger="click">Add new item
@@ -41,7 +41,7 @@ Items-Master
 <div class="mx-2 mt-2 relative overflow-x-auto h-8">
     <a 
       type="button"
-      hx-get="/items/new/inline"
+      hx-get={% url "items:new-inline" %}
       hx-target="tbody > tr:last-child"
       hx-swap="afterend"
       class="py-1 px-2 font-semibold text-green-600 cursor-pointer">

@@ -16,7 +16,7 @@
       <button 
         disabled
         type="button"
-        hx-get="/items/delete/{{item.id}}" 
+        hx-get={% url "items:delete" item.id %} 
         hx-target="body" 
         hx-swap="beforeend" 
         hx-trigger="click"
@@ -25,7 +25,7 @@
       </button>
       <button 
         type="button"
-        hx-post="/items/update/{{item.id}}"
+        hx-post={% url "items:update-inline" item.id %}
         hx-target="#id-{{item.id}}"
         hx-swap="outerHTML"
         hx-include="[name='name'], [name='description'], [name='volume'], [name='weigth']"
