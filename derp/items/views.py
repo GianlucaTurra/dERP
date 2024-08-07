@@ -17,6 +17,15 @@ def master_file(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
+def inline(request: HttpRequest, uuid: str) -> HttpResponse:
+    """Return single iteme line for table
+    Used to undo the update inline
+    """
+    item = get_object_or_404(Item, pk=uuid)
+    return render(request, 'item_inline.html', {'item': item})
+
+
+@login_required
 def item_detail(request: HttpRequest, uuid: str) -> HttpResponse:
     """Return template of single item detail
     """

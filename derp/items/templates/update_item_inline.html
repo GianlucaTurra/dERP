@@ -14,14 +14,12 @@
     <td scope="row">
       {% csrf_token %}
       <button 
-        disabled
         type="button"
-        hx-get={% url "items:delete" item.id %} 
-        hx-target="body" 
-        hx-swap="beforeend" 
-        hx-trigger="click"
-        class="py-1 px-2 font-semibold rounded-lg bg-slate-400 text-slate-100">
-        D
+        hx-get={% url "items:inline" item.id %}
+        hx-target="#id-{{item.id}}"
+        hx-swap="outerHTML"
+        class="py-1 px-2 font-semibold rounded-lg bg-red-700 text-slate-100">
+        C
       </button>
       <button 
         type="button"

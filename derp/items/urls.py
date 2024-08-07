@@ -11,4 +11,5 @@ urlpatterns = [
     path('new/', views.new_item, name='new'),
     path('new/inline', views.new_item_inline, name='new-inline'),
     path('detail/<uuid:uuid>', views.item_detail, name='detail'),
+    path('inline/<uuid:uuid>', views.inline, name='inline'),
 ]
