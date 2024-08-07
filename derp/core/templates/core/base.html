@@ -1,39 +1,39 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{% block title %}{% endblock title %} | dERP </title>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% load static %}
-    <script src="{% static 'htmx.min.js' %}" defer></script>
-    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
-    {% tailwind_css %}
-  </head>
-  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <nav class="p-6 flex justify-between items-center border-b-8 border-gray-800 bg-yellow-600">
-      <div class="relative inline-block">
-        <a 
-          hx-get="/menu"
-          type="button"
-          class="px-2 py-2 mx-2 text-lg font-semibold rounded-lg bg-slate-700 text-slate-50 cursor-pointer"
-          hx-target="#menu"
-          hx-trigger="click"
-          hx-swap="innerHTML">M</a>
-          <div id="menu"></div>
-      </div>
-      <div>
-          <a href="/" class="text-lg font-medium text-slate-100">dERP</a>
-      </div>
-      <div class="space-x-6">
-        {% if request.user.is_authenticated %}
-        <a href="/logout/" class="px-6 py-4 rounded-lg text-lg font-semibold bg-teal-700 text-slate-100 hover:bg-slate-100 hover:text-yellow-500">Logout</a>
-        {% else %}
-        <a href="#" class="px-6 py-4 rounded-lg text-lg font-semibold bg-teal-700 text-slate-100 hover:bg-slate-100 hover:text-yellow-500">Login</a>
-        {% endif %}
-      </div>
-    </nav>
-    {% block content %}{% endblock content %}
-  </body>
+    <head>
+        <title>{% block title %}{% endblock title %} | dERP </title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% load static %}
+        <script src="{% static 'htmx.min.js' %}" defer></script>
+        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+        {% tailwind_css %}
+    </head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <nav class="p-6 flex justify-between items-center border-b-8 border-gray-800 bg-yellow-600">
+        <div class="relative inline-block">
+            <button type="button"
+                class="px-2 py-2 mx-2 text-lg font-semibold rounded-lg bg-slate-700 text-slate-50 cursor-pointer"
+                _="on click toggle [@hidden='true'] on #menu">M</button>
+            <div id="menu"
+                hidden
+                hx-get="/menu"
+                hx-trigger="load"
+                hx-swap="innerHTML"></div>
+        </div>
+        <div>
+            <a href="/" class="text-lg font-medium text-slate-100">dERP</a>
+        </div>
+        <div class="space-x-6">
+            {% if request.user.is_authenticated %}
+            <a href="/logout/" class="px-6 py-4 rounded-lg text-lg font-semibold bg-teal-700 text-slate-100 hover:bg-slate-100 hover:text-yellow-500">Logout</a>
+            {% else %}
+            <a href="#" class="px-6 py-4 rounded-lg text-lg font-semibold bg-teal-700 text-slate-100 hover:bg-slate-100 hover:text-yellow-500">Login</a>
+            {% endif %}
+        </div>
+        </nav>
+        {% block content %}{% endblock content %}
+    </body>
 </html>

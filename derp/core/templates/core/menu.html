@@ -1,17 +1,14 @@
-<div id="multi-menu"
-    _="on closeMultiMenu add .closing remove me"
-    class="mt-4 absolute z-50 shadow-lg rounded-lg w-32 bg-slate-50">
+<div class="mt-4 absolute z-50 shadow-lg rounded-lg w-32 bg-slate-50">
+    <p class="p-2 italic font-semibold text-slate-700">Applications</p>
     {% for app in apps %}
-    <div class="border-b border-slate-400 block p-2">
-        <p _="on click toggle .hidden on #{{app.name}}"
-            class="font-semibold cursor-default">{{ app.name }}</p>
-        <div id="{{app.name}}" class="hidden pl-4">
+    <div class="border-t border-slate-400 block p-2">
+        <p _="on click toggle [@hidden='true'] on #{{app.name}}"
+            class="font-semibold cursor-default text-slate-700">{{ app.name }}</p>
+        <div id="{{app.name}}" hidden class="pl-4">
             {% for endpoint in app.endpoints %}
-            <a href="{{endpoint.url}}">{{ endpoint.name }}</a>
+            <a class="font-light text-slate-700" href="{{endpoint.url}}">{{ endpoint.name }}</a>
             {% endfor %}
         </div>
     </div>
     {% endfor %}
-    <p _="on click trigger closeMultiMenu" 
-        class="font-semibold text-yellow-600 p-2 cursor-pointer">Close</p>
 </div>
