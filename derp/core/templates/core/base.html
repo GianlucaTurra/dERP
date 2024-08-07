@@ -10,6 +10,7 @@
         <script src="{% static 'htmx.min.js' %}" defer></script>
         <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
         {% tailwind_css %}
+        {% block extra %}{% endblock extra %}
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         <nav class="p-6 flex justify-between items-center border-b-8 border-gray-800 bg-yellow-600">

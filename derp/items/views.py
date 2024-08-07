@@ -81,7 +81,7 @@ def delete_item(request: HttpRequest, uuid: str) -> HttpResponse:
     item = get_object_or_404(Item, pk=uuid)
     if request.method == 'DELETE':
         item.delete()
-        return master_file(request)
+        return render(request, 'core/empty.html')
     return render(request, 'confirm_delete.html', {'item': item})
 
 

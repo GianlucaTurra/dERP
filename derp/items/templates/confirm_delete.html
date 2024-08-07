@@ -9,7 +9,7 @@
         class="p-2 m-2 bg-teal-700 text-slate-50 font-semibold rounded-lg w-full hover:bg-yellow-600 hover:text-slate-50"
         hx-delete={% url "items:delete" item.id %}
         hx-target="#id-{{item.id}}" 
-        hx-swap="delete swap:1s" 
+        hx-swap="outerHTML swap:1s" 
         _="on click trigger closeModal">
         Delete
     </button>
