@@ -12,23 +12,21 @@
         <input type="number" name="weigth" value="{{ item.weigth }}" class="rounded-lg w-full">
     </td>
     <td scope="row">
-      {% csrf_token %}
-      <button 
-        type="button"
-        hx-get={% url "items:inline" item.id %}
-        hx-target="#id-{{item.id}}"
-        hx-swap="outerHTML"
-        class="py-1 px-2 font-semibold rounded-lg bg-red-700 text-slate-100">
-        C
-      </button>
-      <button 
-        type="button"
-        hx-post={% url "items:update-inline" item.id %}
-        hx-target="#id-{{item.id}}"
-        hx-swap="outerHTML"
-        hx-include="[name='name'], [name='description'], [name='volume'], [name='weigth']"
-        class="py-1 px-2 font-semibold rounded-lg bg-blue-600 text-slate-100">
-        U
-      </button>
+        {% csrf_token %}
+        <button 
+            type="button"
+            hx-get={% url "items:inline" item.id %}
+            hx-target="#id-{{item.id}}"
+            hx-swap="outerHTML">
+            <span class="material-symbols-rounded text-slate-700" style="font-size: 1.75rem" title="Undo changes">undo</span>
+        </button>
+        <button 
+            type="button"
+            hx-post={% url "items:update-inline" item.id %}
+            hx-target="#id-{{item.id}}"
+            hx-swap="outerHTML"
+            hx-include="[name='name'], [name='description'], [name='volume'], [name='weigth']">
+            <span class="material-symbols-rounded text-slate-700" style="font-size: 1.75rem" title="Save changes">save</span>
+        </button>
     </td>
   </tr>

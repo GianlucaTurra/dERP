@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"/>
         {% load static %}
         <script src="{% static 'htmx.min.js' %}" defer></script>
         <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
@@ -16,8 +17,13 @@
         <nav class="p-6 flex justify-between items-center border-b-8 border-gray-800 bg-yellow-600">
         <div class="relative inline-block">
             <button type="button"
-                class="px-2 py-2 mx-2 text-lg font-semibold rounded-lg bg-slate-700 text-slate-50 cursor-pointer"
-                _="on click toggle [@hidden='true'] on #menu">M</button>
+                class="mx-2 text-slate-100 cursor-pointer"
+                _="on click toggle [@hidden='true'] on #menu">
+                <span class="material-symbols-rounded" style="font-size: 2.25rem">menu</span>
+            </button>
+            <a href="/" class="text-slate-100">
+                <span class="material-symbols-rounded" style="font-size: 2.25rem">home</span>
+            </a>
             <div id="menu"
                 hidden
                 hx-get="/menu"
@@ -25,7 +31,7 @@
                 hx-swap="innerHTML"></div>
         </div>
         <div>
-            <a href="/" class="text-lg font-medium text-slate-100">dERP</a>
+            <p class="font-semibold text-lg text-slate-100">dERP</p>
         </div>
         <div class="space-x-6">
             {% if request.user.is_authenticated %}
