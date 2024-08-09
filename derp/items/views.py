@@ -68,7 +68,7 @@ def new_item_inline(request: HttpRequest) -> HttpResponse:
         item.created_by = request.user # type: ignore
         item.save()
         return render(request, 'item_inline.html', {'item': item})
-    return render(request, 'create_item_inline.html', {'w_options': WEIGTH, 'v_options': VOLUME})
+    return render(request, 'add_item_inline.html', {'w_options': WEIGTH, 'v_options': VOLUME})
 
 
 @login_required

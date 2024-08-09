@@ -10,17 +10,15 @@
             hx-get={% url "items:delete" item.id %} 
             hx-target="body" 
             hx-swap="beforeend" 
-            hx-trigger="click"
-            class="py-1 px-2 font-semibold rounded-lg bg-red-700 text-slate-100">
-            D
+            hx-trigger="click">
+            <span class="material-symbols-rounded text-slate-700" style="font-size: 1.75rem" title="Delete this item">delete</span>
         </button>
         <button 
             type="button"
             hx-get={% url "items:update-inline" item.id %}
             hx-target="#id-{{item.id}}"
-            hx-swap="outerHTML"
-            class="py-1 px-2 font-semibold rounded-lg bg-blue-600 text-slate-100">
-            U
+            hx-swap="outerHTML">
+            <span class="material-symbols-rounded text-slate-700" style="font-size: 1.75rem" title="Edit this item">edit</span>
         </button>
     </td>
 </tr>

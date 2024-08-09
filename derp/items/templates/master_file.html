@@ -53,8 +53,8 @@ Items-Master
         hx-get={% url "items:new-inline" %}
         hx-target="tbody > tr:last-child"
         hx-swap="afterend"
-        class="py-1 px-2 font-semibold text-green-600 cursor-pointer">
-        New
+        class="py-1 px-2 font-semibold cursor-pointer">
+        <span class="material-symbols-rounded text-green-600" style="font-size: 1.5rem" title="Create a new row">add</span>
     </a>
 </div>
 {% endblock content %}

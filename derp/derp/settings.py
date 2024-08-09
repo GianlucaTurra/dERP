@@ -87,7 +87,6 @@ INTERNAL_IPS = [
 ]
 NPM_BIN_PATH = 'D:\\Node-js\\npm.cmd'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
