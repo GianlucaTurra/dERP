@@ -8,14 +8,14 @@ from django.contrib.auth.models import User
 
 class Model(models.Model):
     """Utility class for uuid
-    This only inherit the django Model class to chango the 
+    This only inherit the django Model class to chango the
     default id with the uuid
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
 
     class Meta:
         """
-        Defines the model as an abstract class 
+        Defines the model as an abstract class
         """
         abstract = True
 
@@ -26,13 +26,13 @@ class UserOperations(models.Model):
     """
     created_by = models.ForeignKey(
         User,
-        related_name='created_items',
+        related_name='+',
         on_delete=models.CASCADE,
         null=True
     )
     last_modified_by = models.ForeignKey(
         User,
-        related_name='modified_items',
+        related_name='+',
         on_delete=models.CASCADE,
         null=True,
         blank=True
@@ -40,6 +40,6 @@ class UserOperations(models.Model):
 
     class Meta:
         """
-        Defines the model as an abstract class 
+        Defines the model as an abstract class
         """
         abstract = True

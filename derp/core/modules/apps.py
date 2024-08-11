@@ -31,7 +31,9 @@ installed_apps = [
         ]
     ),
     App(
-        name='Test',
-        endpoints=[]
+        name='Wearhouse',
+        endpoints=[
+            EndPoint('Master File', 'wearhouse/master'),
+        ]
     )
 ]
