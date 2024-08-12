@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete/<uuid:uuid>', views.delete, name='delete'),
     path('update-inline/<uuid:uuid>', views.update_inline, name='update-inline'),
     path('inline/<uuid:uuid>', views.inline, name='inline'),
+    path('new/', views.new, name='new'),
+    path('new-inline/', views.new_inline, name='new-inline'),
 ]

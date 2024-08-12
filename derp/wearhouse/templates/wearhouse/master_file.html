@@ -3,6 +3,18 @@
 {% block title %}Wearhouses{% endblock title %}
 
 {% block content %}
+<!--BUTTONS-->
+<div>
+    <button 
+        class="mt-4 m-2 p-2 rounded-lg bg-teal-700 text-slate-50 font-semibold 
+        hover:bg-slate-100 hover:text-yellow-500" 
+        hx-get={% url "wearhouse:new" %} 
+        hx-target="body" 
+        hx-swap="beforeend" 
+        hx-trigger="click">Add new wearhouse
+    </button>
+</div>
+
 <!--GRID-->
 <div id="grid" class="mx-2 mt-6 relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-m text-left table-auto border-collapse">
@@ -20,5 +32,17 @@
         {% endfor %}
         </tbody>
     </table>
-    </div>
-{% endblock content %}
+</div>
+
+<!--NEW LINE-->
+<div class="mx-2 mt-2 relative overflow-x-auto h-8">
+    <a 
+        type="button"
+        hx-get={% url "wearhouse:new-inline" %}
+        hx-target="tbody > tr:last-child"
+        hx-swap="afterend"
+        class="py-1 px-2 font-semibold cursor-pointer">
+        <span class="material-symbols-rounded text-green-600" style="font-size: 1.5rem" title="Create a new row">add</span>
+    </a>
+</div>
+{% endblock content %} 
