@@ -89,3 +89,9 @@ def new_inline(request: HttpRequest) -> HttpResponse:
         wearhouse.save()
         return render(request, 'wearhouse/inline_record.html', {'wearhouse': wearhouse})
     return render(request, 'wearhouse/add_wearhouse_inline.html')
+
+
+@login_required
+def assigne_stock_units(request: HttpRequest) -> HttpResponse:
+    # TODO this method should check for wearhouse existence and add stockunits to it
+    pass

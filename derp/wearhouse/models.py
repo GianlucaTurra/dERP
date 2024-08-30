@@ -1,4 +1,4 @@
-# pylint: disable=missing-module-docstring,invalid-str-returned
+# pylint: disable=missing-module-docstring,invalid-str-returned, invalid-repr-returned
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
@@ -20,7 +20,8 @@ class Wearhouse(
     stockunits = models.ForeignKey(
         'wearhouse.StockUnit',
         verbose_name=_('Stock units'),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True  # TODO da togliere poi
     )
 
     class Meta:
@@ -33,16 +34,18 @@ class Wearhouse(
         ordering = ['name']
 
     def __str__(self) -> str:
-        return self.name
+        return self.name 
 
 
 class StockUnit(
     TimeStampedModel,
+    abstract_models.Model,
     abstract_models.UserOperations):
     """Basic unit of a wearhouse
     Each stockunit is capable of containing a certain amount of a 
     specific item. It also carries information about the current state.
     """
+    name = models.CharField(_("Stock unit name"), max_length=51, unique=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     stored_quantity = models.FloatField(_('Stored quantity'), null=False)
     max_quantity = models.FloatField(_('Maximum quantity'), null=False, blank=False)
@@ -55,7 +58,7 @@ class StockUnit(
         get_latest_by = '-modified'
 
     def __str__(self) -> str:
-        return f'{self.id}: {self.stored_quantity}/{self.max_quantity}'
+        return f'{self.name}: {self.stored_quantity}/{self.max_quantity}'
 
     def __repr__(self) -> str:
-        return self.id # type: ignore
+        return self.name
