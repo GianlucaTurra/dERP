@@ -7,12 +7,21 @@ from .forms import WearhouseForm
 from .models import Wearhouse
 
 
+EMPTY_TEMPLATE = 'core/empty.html'
+WEARHOUSE_MASTER_FILE = 'wearhouse/master_file.html'
+WEARHOUSE_INLINE_RECORD = 'wearhouse/inline_record.html'
+WEARHOUSE_CONFIRM_DELETE = 'wearhouse/confirm_delete.html'
+WEARHOUSE_UPDATE_INLINE = 'wearhouse/update_inline.html'
+WEARHOUSE_ADD_WEARHOUSE = 'wearhouse/add_wearhouse.html'
+WEARHOUSE_ADD_INLINE = 'wearhouse/add_wearhouse_inline.html'
+
+
 @login_required
 def master_file(request: HttpRequest) -> HttpResponse:
     """Get all records from the db table
     """
     wearhouses = Wearhouse.objects.all()
-    return render(request, 'wearhouse/master_file.html', {'wearhouses': wearhouses})
+    return render(request, WEARHOUSE_MASTER_FILE, {'wearhouses': wearhouses})
 
 
 @login_required
@@ -21,7 +30,7 @@ def inline(request: HttpRequest, uuid: str) -> HttpResponse:
     Raise 404 if no wearhouse is found
     """
     wearhouse = get_object_or_404(Wearhouse, pk=uuid)
-    return render(request, 'wearhouse/inline_record.html', {'wearhouse': wearhouse})
+    return render(request, WEARHOUSE_INLINE_RECORD, {'wearhouse': wearhouse})
 
 
 @login_required
@@ -34,8 +43,8 @@ def delete(request: HttpRequest, uuid: str) -> HttpResponse:
     wearhouse = get_object_or_404(Wearhouse, pk=uuid)
     if request.method == 'DELETE':
         wearhouse.delete()
-        return render(request, 'core/empty.html')
-    return render(request, 'wearhouse/confirm_delete.html', {'wearhouse': wearhouse})
+        return render(request, EMPTY_TEMPLATE)
+    return render(request, WEARHOUSE_CONFIRM_DELETE, {'wearhouse': wearhouse})
 
 
 @login_required
@@ -52,8 +61,8 @@ def update_inline(request: HttpRequest, uuid: str) -> HttpResponse:
         wearhouse.address = request.POST['address']
         wearhouse.last_modified_by = request.user # type: ignore
         wearhouse.save()
-        return render(request, 'wearhouse/inline_record.html', {'wearhouse': wearhouse})
-    return render(request, 'wearhouse/update_inline.html', {'wearhouse': wearhouse})
+        return render(request, WEARHOUSE_INLINE_RECORD, {'wearhouse': wearhouse})
+    return render(request, WEARHOUSE_UPDATE_INLINE, {'wearhouse': wearhouse})
 
 
 @login_required
@@ -71,7 +80,7 @@ def new(request: HttpRequest) -> HttpResponse:
             wearhouse.save()
             return redirect('/wearhouse/master')
     form = WearhouseForm()
-    return render(request, 'wearhouse/add_wearhouse.html', {'form': form})
+    return render(request, WEARHOUSE_ADD_WEARHOUSE, {'form': form})
 
 
 @login_required
@@ -87,8 +96,8 @@ def new_inline(request: HttpRequest) -> HttpResponse:
         wearhouse.address = request.POST['address']
         wearhouse.created_by = request.user # type: ignore
         wearhouse.save()
-        return render(request, 'wearhouse/inline_record.html', {'wearhouse': wearhouse})
-    return render(request, 'wearhouse/add_wearhouse_inline.html')
+        return render(request, WEARHOUSE_INLINE_RECORD, {'wearhouse': wearhouse})
+    return render(request, WEARHOUSE_ADD_INLINE)
 
 
 @login_required
