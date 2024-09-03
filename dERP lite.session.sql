@@ -1,1 +1,1 @@
-SELECT * from items;
+drop table wearhouse_stockunit;

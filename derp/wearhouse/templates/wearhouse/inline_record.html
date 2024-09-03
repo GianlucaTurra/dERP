@@ -1,0 +1,23 @@
+<tr id="id-{{wearhouse.id}}" class="odd:bg-slate-50 even:bg-slate-200 fade-me-out">
+    <td class="py-2 px-4 font-semibold">{{ wearhouse.name }}</td>
+    <td class="py-2 px-4">{{ wearhouse.description }}</td>
+    <td class="py-2 px-4">{{ wearhouse.address }} </td>
+    <td>
+        {% csrf_token %}
+        <button 
+            type="button"
+            hx-get={% url "wearhouse:delete" wearhouse.id %} 
+            hx-target="body" 
+            hx-swap="beforeend" 
+            hx-trigger="click">
+            <span class="material-symbols-rounded text-slate-700" style="font-size: 1.75rem" title="Delete this item">delete</span>
+        </button>
+        <button 
+            type="button"
+            hx-get={% url "wearhouse:update-inline" wearhouse.id %}
+            hx-target="#id-{{wearhouse.id}}"
+            hx-swap="outerHTML">
+            <span class="material-symbols-rounded text-slate-700" style="font-size: 1.75rem" title="Edit this item">edit</span>
+        </button>
+    </td>
+</tr>
