@@ -10,25 +10,24 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     Home page's view
     """
     if not request.user.is_authenticated:
-        return redirect('/login/')  
+        return redirect("/login/")
     # TODO: insert index data
-    return render(request, 'core/index.html')
+    return render(request, "core/index.html")
 
 
 @login_required
-def logout_user(request: HttpRequest):
-    """Custom view for logout
-    """
+def logout_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
+    """Custom view for logout"""
     logout(request)
-    return index(request)
+    return redirect("/login/")
 
 
 @login_required
 def menu(request: HttpRequest) -> HttpResponse:
     """Retrieve all installed apps
     App names are displayed in a dropdown menu
-    Each apps shows the links to single pages (Items -> Master file)
+    Each app shows the links to single pages (Items -> Master file)
     """
-    if request.method == 'GET':
-        return render(request, 'core/menu.html', {'apps': installed_apps})
-    return render(request, 'core/index.html')
+    if request.method == "GET":
+        return render(request, "core/menu.html", {"apps": installed_apps})
+    return render(request, "core/index.html")

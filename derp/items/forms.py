@@ -2,33 +2,30 @@
 from django import forms
 from .models import Item
 
-BASIC_STYLE = 'rounded-lg w-full'
-DIMENSIONS_STYLE = 'rounded-lg w-full'
+BASIC_STYLE = "rounded-lg w-full"
+DIMENSIONS_STYLE = "rounded-lg w-full"
 
 
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['name', 'description', 'volume', 'weigth', 'volume_measure', 'weigth_measure']
+        fields = [
+            "name",
+            "description",
+            "volume",
+            "weigth",
+            "volume_measure",
+            "weigth_measure",
+        ]
         widgets = {
-                'name': forms.TextInput(attrs={
-                    'class': BASIC_STYLE,
-                    'placeholder': 'Some name'
-                }),
-                'description': forms.Textarea(attrs={
-                    'class': BASIC_STYLE,
-                    'placeholder': 'Some brief description'
-                }),
-                'volume': forms.NumberInput(attrs={
-                    'class': DIMENSIONS_STYLE
-                }),
-                'weigth': forms.NumberInput(attrs={
-                    'class': f'{DIMENSIONS_STYLE}'
-                }),
-                'volume_measure': forms.Select(attrs={
-                    'class': BASIC_STYLE
-                }),
-                'weigth_measure': forms.Select(attrs={
-                    'class': f'{BASIC_STYLE}'
-                }),
-            }
+            "name": forms.TextInput(
+                attrs={"class": BASIC_STYLE, "placeholder": "Some name"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": BASIC_STYLE, "placeholder": "Some brief description"}
+            ),
+            "volume": forms.NumberInput(attrs={"class": DIMENSIONS_STYLE}),
+            "weigth": forms.NumberInput(attrs={"class": f"{DIMENSIONS_STYLE}"}),
+            "volume_measure": forms.Select(attrs={"class": BASIC_STYLE}),
+            "weigth_measure": forms.Select(attrs={"class": f"{BASIC_STYLE}"}),
+        }

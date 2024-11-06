@@ -11,7 +11,7 @@
     },
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "Dracula Theme",
     "tailwindCSS.includeLanguages": {
         "html": "html",
         "django-html": "html",
