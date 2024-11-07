@@ -1,0 +1,20 @@
+<dialog id="base_dialog" class="overflow-auto resize">
+  <button
+    type="button"
+    onclick="closeDialog()"
+    class="absolute top-2 right-2 cursor-pointer"
+  >
+    <span class="material-symbols-rounded" style="font-size: 1.75rem"
+      >close</span
+    >
+  </button>
+  {% block content %}{% endblock content %}
+</dialog>
+
+{% block script %}
+<script>
+  function closeDialog() {
+    this.closest("dialog").close();
+  }
+</script>
+{% endblock script %}
