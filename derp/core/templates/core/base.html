@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dErp | {% block title %}{% endblock title %}</title>
+    <title>dErp {% block title %}{% endblock title %}</title>
     {% load static %} {% load static tailwind_tags %} {% tailwind_css %}
     <script src="{% static 'htmx.min.js' %}" defer></script>
   </head>
