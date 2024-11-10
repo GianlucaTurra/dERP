@@ -1,23 +1,20 @@
-{% comment "navbar" %}
-TODO: The navbar currently lacks color styling
-Postponed to a time where theme colors are added
-Also color style lacking for components
+{% comment "navbar" %} TODO: The navbar currently lacks color styling Postponed
+to a time where theme colors are added Also color style lacking for components
 {% endcomment %}
-<nav class="relative flex justify-between items-center p-4 border-b-4">
-    <div>
-        <span class="material-symbols-rounded" style="font-size: 2.25rem">home</span>
+<nav class="relative flex justify-between items-center p-2 border-b-4">
+  <div class="cursor-pointer mx-2">
+    <span class="material-symbols-outlined" style="font-size: 1.7rem"
+      >home</span
+    >
+  </div>
+  {% include "core/search_bar.html" %}
+  <div>
+    <div> 
+        <a 
+          class="p-2 rounded-md text-lg font-semibold" 
+          href="{% url "core:logout" %}"
+          >Logout
+        </a>
     </div>
-    <div>
-        {% comment "Searchbar" %}
-        TODO: Insert a searchbar to navigate to different views
-        {% endcomment %}
-    </div>
-    <div>
-        {% comment "User actions" %}
-        TODO: Insert a user's actions drop down menu 
-        {% endcomment %}
-        <button type="button">
-            <a href="{% url "core:Logout" %}" class="p-2 rounded-md text-lg font-semibold">Logout</a>
-        </button>
-    </div>
+  </div>
 </nav>

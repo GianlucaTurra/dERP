@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="{% static "css/core/searchBar.css" %}">
+<script src="{% static "javascript/core/searchBar.js" %}" defer></script>
+<div class="search-bar group rounded-xl">
+  <div class="relative flex items-center overflow-hidden">
+    <span
+      class="material-symbols-outlined cursor-pointer"
+      style="font-size: 1.7rem"
+      >search</span
+    >
+    <input
+      id="searchbar"
+      placeholder="Search..."
+      class="search-input h-full w-0 duration-700 group-hover:w-96"
+      style="background-color: transparent"
+    />
+    <!--TODO: there's an eventlistener in the js file because `onkeydown` does not work-->
+    <span
+      id="eraser"
+      class="material-symbols-outlined cursor-pointer mr-1"
+      style="font-size: 1.7rem"
+      onclick="clearSearchBar()"
+      >close
+    </span>
+  </div>
+</div>
