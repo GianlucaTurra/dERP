@@ -1,20 +1,23 @@
 from django.contrib.auth.forms import AuthenticationForm
+from django.utils.translation import gettext_lazy as _
 from django import forms
 
 
-INPUT_CLASSES: str = 'border border-slate-500 text-slate-700 rounded-md block w-full'
+INPUT_CLASSES: str = "border block w-full"
 
 
 class LoginForm(AuthenticationForm):
-    """Django Form for user login
-
-    Form input fields are defined here wile labels and input button are in the template
-    """
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Username',
-        'class': INPUT_CLASSES
-    }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Password',
-        'class': INPUT_CLASSES
-    }))
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"placeholder": _("Your user name"), "class": INPUT_CLASSES}
+        ),
+        label=_("Username"),
+        required=True,
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"placeholder": _("Your password"), "class": INPUT_CLASSES}
+        ),
+        label=_("Password"),
+        required=True,
+    )
